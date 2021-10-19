@@ -8,7 +8,7 @@ const imageStorage = multer.diskStorage({
   destination: "images", // Destination to store image
   filename: (req, file, cb) => {
     imageName = file.fieldname + "_" + Date.now() + file.originalname;
-    req.body.imageAddress = process.env.URL_staticfiles + imageName;
+    req.body.imageName = imageName;
 
     cb(null, imageName); // file.fieldname is name of the field (image) ,path.extname get the uploaded file extension
   },
@@ -41,14 +41,14 @@ const addProduct = async (req, res, next) => {
       offer: productDetails.offfers,
       seller: productDetails.seller,
       discription: productDetails.productDiscription,
-      image: productDetails.imageAddress,
+      image: productDetails.imageName,
       catagory: productDetails.catagory,
       stock: productDetails.stock,
     });
-    res.status(201).send(productDetails.imageAddress);
+    res.status(201).send(data._id);
   } catch (error) {
     console.log(error);
-    res.status(409).send("Failed to add product" + error);
+    send("Failed to add product" + error);
   }
 };
 
