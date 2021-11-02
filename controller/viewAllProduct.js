@@ -11,6 +11,7 @@ const viewAllProducts = async (req, res, next) => {
             let imageName = data[i].image;
             data[i].image = imageBaseUrl + imageName;
         }
+        console.log(data);
         res.send(data);
     } catch (error) {
         console.log(error);
